@@ -1,11 +1,10 @@
 import React from 'react'
 import './header.css'
-import { FaSearch, FaSignOutAlt } from 'react-icons/fa'
+import { FaSearch } from 'react-icons/fa'
 import { MdShoppingBasket } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { useStateValue } from '../../StateProvider'
 import { getTotalProduct } from '../../reducer'
-import { signOut } from 'firebase/auth'
 import { auth } from '../../firebase'
 
 const Header = () => {
@@ -13,7 +12,7 @@ const Header = () => {
 
 	const handleAuthentication = () => {
 		if (user) {
-			signOut(auth)
+			auth.signOut()
 		}
 	}
 
@@ -44,10 +43,12 @@ const Header = () => {
 						</span>
 					</div>
 				</Link>
-				<div className='header__option'>
-					<span className='header__optionLineOne'>Returns</span>
-					<span className='header__optionLineTwo'>& Orders</span>
-				</div>
+				<Link to='/orders'>
+					<div className='header__option'>
+						<span className='header__optionLineOne'>Returns</span>
+						<span className='header__optionLineTwo'>& Orders</span>
+					</div>
+				</Link>
 				<div className='header__option'>
 					<span className='header__optionLineOne'>Your</span>
 					<span className='header__optionLineTwo'>Prime</span>

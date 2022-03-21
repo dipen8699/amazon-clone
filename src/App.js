@@ -9,10 +9,10 @@ import {
 	ResetPassword,
 	Register,
 	Payment,
+	Orders,
 } from './components/index'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { auth } from './firebase'
-import { onAuthStateChanged } from 'firebase/auth'
 import { useStateValue } from './StateProvider'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
@@ -25,7 +25,7 @@ function App() {
 	const [{}, dispatch] = useStateValue()
 
 	useEffect(() => {
-		onAuthStateChanged(auth, (user) => {
+		auth.onAuthStateChanged((user) => {
 			if (user) {
 				dispatch({
 					type: 'SET_USER',
@@ -63,6 +63,10 @@ function App() {
 						<Elements stripe={promise}>
 							<Payment />
 						</Elements>
+					</Route>
+					<Route exact path='/orders'>
+						<Header />
+						<Orders />
 					</Route>
 					<Route exact path='/forgot-password'>
 						<ForgotPassword />

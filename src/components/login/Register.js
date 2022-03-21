@@ -2,12 +2,7 @@ import React, { useState } from 'react'
 import './login.css'
 import { Link, useHistory } from 'react-router-dom'
 import { auth } from '../../firebase'
-import {
-	createUserWithEmailAndPassword,
-	updateProfile,
-	sendEmailVerification,
-	signOut,
-} from 'firebase/auth'
+import { sendEmailVerification } from 'firebase'
 
 function Register() {
 	const history = useHistory()
@@ -19,15 +14,15 @@ function Register() {
 	const register = (e) => {
 		e.preventDefault()
 
-		createUserWithEmailAndPassword(auth, email, password)
+		auth.createUserWithEmailAndPassword(email, password)
 			.then(
 				(user) => {
 					// it successfully created a new user with email and password
 					sendEmailVerification(user.user)
 					if (user !== null) {
-						updateProfile(auth.currentUser, { displayName: name })
+						auth.currentUser.updateProfile({ displayName: name })
 					}
-					signOut(auth)
+					auth.signOut()
 					setStatus({ type: 'success' })
 				},
 				setTimeout(() => {

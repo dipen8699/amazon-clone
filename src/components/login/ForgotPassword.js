@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import './login.css'
 import { Link, useHistory } from 'react-router-dom'
 import { auth } from '../../firebase'
-import { sendPasswordResetEmail } from 'firebase/auth'
 
 function ForgotPassword() {
 	const history = useHistory()
@@ -12,7 +11,7 @@ function ForgotPassword() {
 	const resetPassword = (e) => {
 		e.preventDefault()
 
-		sendPasswordResetEmail(auth, email)
+		auth.sendPasswordResetEmail(email)
 			.then(
 				() => {
 					setStatus({ type: 'success' })

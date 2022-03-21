@@ -84,3 +84,33 @@
 	padding: 0.5rem 0rem;
 	background-color: #d4edda !important;
 }
+
+.change__password {
+	display: flex;
+	flex-direction: row;
+}
+
+.login__forgotPassword {
+	font-size: 12px;
+	margin: 5px -5px 5px 0px;
+}
+
+.login__resetpassword {
+	font-size: 12px;
+	margin: 5px;
+	margin-left: 6.5rem;
+}
+
+.or {
+	display: flex;
+	justify-content: center;
+}
+
+.login__other {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	font-size: 25px;
+	cursor: pointer;
+}

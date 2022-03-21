@@ -33,6 +33,7 @@
 
 .payment__details > form {
 	max-width: 400px;
+	margin-left: 6.5rem;
 }
 
 .payment__details > h3 {
@@ -49,4 +50,57 @@
 	margin-top: 10px;
 	border-color: #a88734 #9c7e31 #846a29;
 	color: #111;
+}
+
+.payment__details {
+	margin-top: 20px;
+}
+
+.card {
+	background-color: white;
+	padding: 10px 20px 11px;
+	border-radius: 5px;
+	width: 90%;
+	border: 1px solid #afafaf;
+	box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+	margin-bottom: 20px;
+}
+.radio_buttons {
+	display: flex;
+	justify-content: space-around;
+}
+
+.payment__content {
+	width: 50%;
+}
+
+.total__value {
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.crypto_paymentContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.total__value > input {
+	height: 30px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	background-color: white;
+	width: 98%;
+}
+
+.arrow__icon {
+	font-size: 25px;
+	margin-left: 45%;
+}
+
+.title {
+	font-weight: 500;
 }

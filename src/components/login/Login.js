@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import './login.css'
 import { Link, useHistory } from 'react-router-dom'
 import { auth } from '../../firebase'
-import {
-	signInWithEmailAndPassword,
-	sendEmailVerification,
-} from 'firebase/auth'
+import { GoogleAuthProvider, FacebookAuthProvider } from 'firebase'
+import { FaGoogle, FaFacebook } from 'react-icons/fa'
+import firebase from 'firebase'
 
 function Login() {
 	const history = useHistory()
@@ -15,16 +14,50 @@ function Login() {
 
 	const signIn = (e) => {
 		e.preventDefault()
-		signInWithEmailAndPassword(auth, email, password)
+		auth.signInWithEmailAndPassword(email, password)
 			.then((auth) => {
 				if (auth.user.emailVerified === true) {
 					history.push('/')
 				} else {
-					sendEmailVerification(auth.user)
+					auth.user.sendEmailVerification()
 					setStatus({ type: 'success' })
 				}
 			})
 			.catch((error) => setStatus({ type: 'error', error }))
+	}
+
+	const googleSignIn = (e) => {
+		e.preventDefault()
+		const provider = new firebase.auth.GoogleAuthProvider()
+
+		auth.signInWithPopup(provider)
+			.then((result) => {
+				if (result.user) {
+					history.push('/')
+				}
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+	}
+
+	const facebookSignIn = (e) => {
+		e.preventDefault()
+		const provider = new firebase.auth.FacebookAuthProvider()
+
+		auth.signInWithPopup(provider)
+			.then((result) => {
+				// The signed-in user info.
+				const user = result.user
+				if (user) {
+					history.push('/')
+				}
+
+				// ...
+			})
+			.catch((error) => {
+				console.log(error)
+			})
 	}
 
 	return (
@@ -60,12 +93,25 @@ function Login() {
 					>
 						Sign In
 					</button>
-					<Link to='/forgot-password'>
-						<p className='login__forgotPassword'>Forgot password</p>
-					</Link>
-					<Link to='/reset-password'>
-						<p className='login__resetpassword'>Reset password</p>
-					</Link>
+					<div className='change__password'>
+						<Link to='/forgot-password'>
+							<p className='login__forgotPassword'>
+								Forgot password-?
+							</p>
+						</Link>
+						<Link to='/reset-password'>
+							<p className='login__resetpassword'>
+								Reset password
+							</p>
+						</Link>
+					</div>
+					<div className='or'>
+						<h4>or</h4>
+					</div>
+					<div className='login__other'>
+						<FaGoogle onClick={googleSignIn} />
+						<FaFacebook onClick={facebookSignIn} />
+					</div>
 				</form>
 				<p>
 					By signing-in you agree to the AMAZON FAKE CLONE Conditions

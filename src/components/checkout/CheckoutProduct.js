@@ -3,7 +3,7 @@ import { useStateValue } from '../../StateProvider'
 import './checkout.css'
 import { FiMinusCircle, FiPlusCircle } from 'react-icons/fi'
 
-function CheckoutProduct({ id, image, title, price, rating, qty }) {
+function CheckoutProduct({ id, image, title, price, rating, qty, hideButton }) {
 	const [{ basket }, dispatch] = useStateValue()
 
 	const removeFromBasket = () => {
@@ -36,7 +36,7 @@ function CheckoutProduct({ id, image, title, price, rating, qty }) {
 			<div className='checkoutProduct__info'>
 				<p className='checkoutProduct__title'>{title}</p>
 				<p className='checkoutProduct__price'>
-					<small>$</small>
+					<small>₹</small>
 					<strong>{price}</strong>
 				</p>
 				<div className='checkoutProduct__rating'>
@@ -47,18 +47,30 @@ function CheckoutProduct({ id, image, title, price, rating, qty }) {
 						))}
 				</div>
 				<div className='product__qty'>
-					<FiMinusCircle
-						className='button__minus'
-						onClick={minusQty}
-					/>
+					{!hideButton && (
+						<FiMinusCircle
+							className='button__minus'
+							onClick={minusQty}
+						/>
+					)}
+
 					<input
 						className='product__qty__value'
 						type='text'
 						value={qty}
 					/>
-					<FiPlusCircle className='button__plus' onClick={plusQty} />
+					{!hideButton && (
+						<FiPlusCircle
+							className='button__plus'
+							onClick={plusQty}
+						/>
+					)}
 				</div>
-				<button onClick={removeFromBasket}>Remove From Basket</button>
+				{!hideButton && (
+					<button onClick={removeFromBasket}>
+						Remove from Basket
+					</button>
+				)}
 			</div>
 		</div>
 	)
