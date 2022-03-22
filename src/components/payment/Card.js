@@ -102,6 +102,10 @@ function Card() {
 							{processing ? <p>Processing</p> : 'Buy Now'}
 						</span>
 					</button>
+					<span>
+						This Payment methos is now under maintanance,Please
+						refer other Payment option
+					</span>
 				</div>
 
 				{/* Errors */}
